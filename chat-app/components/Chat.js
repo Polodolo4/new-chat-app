@@ -23,17 +23,15 @@ export default class Chat extends Component {
       isConnected: null,
     };
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBiSNnCe9EeSrztghaZcjQlKiOM2f5nuVM",
-      authDomain: "newchatapp-b5a60.firebaseapp.com",
-      projectId: "newchatapp-b5a60",
-      storageBucket: "newchatapp-b5a60.appspot.com",
-      messagingSenderId: "136702526720",
-      appId: "1:136702526720:web:bd77bfd0555d661abfdfe5",
-    };
-
     if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp({
+        apiKey: "AIzaSyBiSNnCe9EeSrztghaZcjQlKiOM2f5nuVM",
+        authDomain: "newchatapp-b5a60.firebaseapp.com",
+        projectId: "newchatapp-b5a60",
+        storageBucket: "newchatapp-b5a60.appspot.com",
+        messagingSenderId: "136702526720",
+        appId: "1:136702526720:web:bd77bfd0555d661abfdfe5",
+      });
     }
 
     //reference to messages collection on firebase. Stores/retrieves the chat messages the user sends
