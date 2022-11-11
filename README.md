@@ -1,83 +1,110 @@
-# chat-app
- 
-## Objective
+# **ChatApp**
 
-To build a chat app for mobile devices using React Native. The app will provide users with a chat interface and options to share images and their
-location.
+## **Project Description**
 
-## Tech used  
+This project is a chat app for mobile devices built using React Native. The app has a chat interface for users with options to share images and their location.
+
+## Tech Used
+
 - React Native
-- Expo App
+- Expo/Expo Go
 - Android Emulator
 
 ## User Stories
 
-1. As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my
-friends and family.
-2. As a user, I want to be able to send messages to my friends and family members to exchange
-the latest news.
-3. As a user, I want to send images to my friends to show them what I’m currently doing.
-4. As a user, I want to share my location with my friends to show them where I am
-5. As a user, I want to be able to read my messages offline so I can reread conversations at any
-time.
-6. As a user with a visual impairment, I want to use a chat app that is compatible with a screen
-reader so that I can engage with a chat interface
+- As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my
+  friends and family.
+- As a user, I want to be able to send messages to my friends and family members to exchange
+  the latest news
+- As a user, I want to send images to my friends to show them what I’m currently doing.
+- As a user, I want to share my location with my friends to show them where I am.
+- As a user, I want to be able to read my messages offline so I can reread conversations at any
+  time.
+- As a user with a visual impairment, I want to use a chat app that is compatible with a screen
+  reader so that I can engage with a chat interface.
 
-## Development Process
+## Key Features
 
-### Setup Expo as Development Environment
+- A page where users can enter their name and choose a background color for the chat screen
+  before joining the chat.
+- A page displaying the conversation, as well as an input field and submit button.
+- The chat must provide users with two additional communication features: sending images
+  and location data.
+- Data gets stored online and offline.
 
-1. Install Expo CLI
+## Setup
 
-```
-npm install expo-cli --global
-```
+1. Clone this repository
 
-2. Create a new expo project
-
-```
-expo init [projectname]
-```
-
-3. Navigate to the project
+2. Install Expo with
 
 ```
-cd [projectname]
+$ npm install expo-cli --global
 ```
 
-4. Start expo project
+3. Navigate to the cloned project's root folder and run
 
 ```
-npx expo start
+$ npm install
 ```
 
-### Install React Navigation library to navigate between screens
+4. Sign up for Expo @ https://expo.dev/
 
-1. Navigate to project folder and run
+5. Install Expo on phone (Search for the Expo app in the relevant app store for your device (iOS or Android) & download.)
 
-```
-npm install react-navigation
-```
-
-2. Install necessary dependencies
+6. Back in project folder/terminal run
 
 ```
-npm install @react-navigation/native @react-navigation/stack
-expo install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+$ expo start
 ```
-### Set up Android Studio as Android Emulator
+
+7. Use phone/Expo Go app to scan QR code
+
+8. Create Firebase Database
+
+- Go to Google Firebase and login with Google account (or register for one if need be)
+- Go to Firebase console and create a new project
+- From Firebase dashboard click on **Build** from left side panel, then **Firestore Database**, then **Create Database**
+- Follow instructions and create new database **IN TEST MODE**
+- Create a new collection called "messages"
+- Under **Project Settings** (gear icon) click **Firestore for Web** button (</> icon) and register your new app per screen instructions
+- Copy the contents of the Firebase configuration (apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId) and replace the contents in the "Chat.js" file
+- From Firebase dashboard click on **Build** from left side panel, then **Authentication**, then **Set up sign-in method** and enable anonymous authentication
+- From Firebase dashboard click on **Build** from left side panel, then **Storage** and create a new storage space in the same fashion you created the **Firestore Database**
+
+9. **Setup is now complete!!!** and app should be fully functional
+
+### Set up Android Studio as Android Emulator (alternative to Expo Go)
 
 1. Download Android Studio
-2. Make sure 'Android Virtual Device' is installed
-3. Create virtual device and click play to start
-4. Select 'Run app on Android' in Expo to run app on virtual device
+2. Set Up Android Emulator
+3. Configure Android Studio from the Welcome Screen
+4. Create Virtual Device
+5. Start Your Emulator
 
-### Install React Native Gifted Chat 
-
-1. Install React Native Gifted Chat
+### Dependencies
 
 ```
-npm install react-native-gifted-chat --save
+
+"@react-native-async-storage/async-storage": "^1.17.10",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/netinfo": "9.3.0",
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/stack": "^6.3.1",
+    "expo": "~46.0.13",
+    "expo-status-bar": "~1.4.0",
+    "firebase": "^8.0.1",
+    "react": "18.0.0",
+    "react-native": "0.69.6",
+    "react-native-gesture-handler": "~2.5.0",
+    "react-native-gifted-chat": "^1.0.4",
+    "react-native-paper": "^4.12.5",
+    "react-native-reanimated": "~2.9.1",
+    "react-native-safe-area-context": "4.3.1",
+    "react-native-screens": "~3.15.0",
+    "react-navigation": "^4.4.4",
+    "expo-permissions": "~13.2.0",
+    "expo-image-picker": "~13.3.1",
+    "expo-location": "~14.3.0",
+    "react-native-maps": "0.31.1"
 ```
-
-
