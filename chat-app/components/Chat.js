@@ -4,6 +4,8 @@ import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
+import CustomActions from "./CustomActions";
+import MapView from "react-native-maps";
 
 const firebase = require("firebase");
 require("firebase/firestore");
@@ -16,18 +18,20 @@ export default class Chat extends Component {
       user: {
         _id: "",
         name: "",
+        image: null,
+        location: null,
       },
       isConnected: false,
     };
 
     if (!firebase.apps.length) {
       firebase.initializeApp({
-        apiKey: "AIzaSyBiSNnCe9EeSrztghaZcjQlKiOM2f5nuVM",
-        authDomain: "newchatapp-b5a60.firebaseapp.com",
-        projectId: "newchatapp-b5a60",
-        storageBucket: "newchatapp-b5a60.appspot.com",
-        messagingSenderId: "136702526720",
-        appId: "1:136702526720:web:bd77bfd0555d661abfdfe5",
+        apiKey: "AIzaSyCFLVG6nGEohP9GRQkMWm3wp-ps8trKslI",
+        authDomain: "finalchat-9a33d.firebaseapp.com",
+        projectId: "finalchat-9a33d",
+        storageBucket: "finalchat-9a33d.appspot.com",
+        messagingSenderId: "417296800324",
+        appId: "1:417296800324:web:1349a4898a1acb8d4dba11",
       });
     }
 
@@ -129,6 +133,8 @@ export default class Chat extends Component {
         text: data.text,
         createdAt: data.createdAt.toDate(),
         user: data.user,
+        image: data.image || null,
+        location: data.location || null,
       });
     });
     this.setState({
@@ -139,9 +145,11 @@ export default class Chat extends Component {
   addMessage = (message) => {
     this.referenceChatMessages.add({
       _id: message._id,
-      text: message.text,
+      text: message.text || "",
       createdAt: message.createdAt,
       user: message.user,
+      image: message.image || null,
+      location: message.location || null,
     });
   };
 
@@ -175,6 +183,29 @@ export default class Chat extends Component {
     );
   }
 
+  //creating button
+  renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
+  renderCustomView(props) {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{ width: 150, height: 100, borderRadius: 13, margin: 3 }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     const { color, name } = this.props.route.params;
 
@@ -182,6 +213,8 @@ export default class Chat extends Component {
       <View style={[{ backgroundColor: color }, styles.container]}>
         <GiftedChat
           renderBubble={this.renderBubble.bind(this)}
+          renderActions={this.renderCustomActions}
+          renderCustomView={this.renderCustomView}
           messages={this.state.messages}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           onSend={(messages) => this.onSend(messages)}
